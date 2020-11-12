@@ -26,6 +26,12 @@ namespace DiscordHaxx
 
         public async void LoadAsync()
         {
+            if (!File.Exists("Config.json"))
+                File.WriteAllText("Config.json", JsonConvert.SerializeObject(new Config()));
+
+            if (!File.Exists("Tokens.txt"))
+                File.Create("Tokens.txt").Close();
+
             try
             {
                 _config = JsonConvert.DeserializeObject<Config>(File.ReadAllText("Config.json"));
